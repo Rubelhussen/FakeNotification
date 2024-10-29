@@ -5,3 +5,46 @@
     <p><span id="bought-count">94</span> People bought this 7 days ago</p>
     <p>Get it between <span id="delivery-start">October 27</span> ~ <span id="delivery-end">November 05</span></p>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+                // Stock count logic
+                let stockCount = Math.floor(Math.random() * (20 - 10 + 1)) + 10; // Random initial stock
+                let stockElement = document.getElementById('stock-count');
+                stockElement.textContent = stockCount;
+
+                // Decrease stock count by 1-3 on page reload, but not less than 1
+                let stockDecrease = Math.floor(Math.random() * 3) + 1;
+                stockCount = Math.max(stockCount - stockDecrease, 1);
+                stockElement.textContent = stockCount;
+
+                // Viewers count logic (changes every 2 seconds)
+                let viewersElement = document.getElementById('viewers-count');
+                setInterval(() => {
+                    let viewersCount = Math.floor(Math.random() * (150 - 18 + 1)) + 18;
+                    viewersElement.textContent = viewersCount;
+                }, 2000);
+
+                // Buyer name logic (changes every 3 seconds)
+                let buyerNames = ["A*****s", "B*****e", "C*****r", "D*****n", "E*****e"];
+                let buyerElement = document.getElementById('buyer-name');
+                setInterval(() => {
+                    let randomName = buyerNames[Math.floor(Math.random() * buyerNames.length)];
+                    buyerElement.textContent = randomName;
+                }, 3000);
+
+                // Purchase count for last 7 days logic
+                let boughtElement = document.getElementById('bought-count');
+                let boughtCount = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
+                boughtElement.textContent = boughtCount;
+
+                // Delivery date logic (current date + 3 days for start, +7 days for end)
+                let currentDate = new Date();
+                let deliveryStartDate = new Date(currentDate.getTime() + 3 * 24 * 60 * 60 * 1000);
+                let deliveryEndDate = new Date(deliveryStartDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+                let options = { month: 'long', day: 'numeric' };
+                document.getElementById('delivery-start').textContent = deliveryStartDate.toLocaleDateString('en-US', options);
+                document.getElementById('delivery-end').textContent = deliveryEndDate.toLocaleDateString('en-US', options);
+            });
+</script>
